@@ -6,13 +6,13 @@ import com.heapik.slot.commonsevent.domain.outbox.EventOutbox;
 import com.heapik.slot.commonsevent.ports.outbox.EventOutboxRepositoryPort;
 import com.heapik.slot.outbox.domain.EventOutboxOrm;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-@Component
+@Repository
 public class EventOutboxRepositoryAdapter implements EventOutboxRepositoryPort {
 
     private final EventOutboxJpaRepository eventOutboxJpaRepository;

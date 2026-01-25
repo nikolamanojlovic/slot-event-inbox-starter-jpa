@@ -3,11 +3,11 @@ package com.heapik.slot.outbox.persistence;
 import com.heapik.slot.commonsevent.domain.outbox.EventOutboxCursor;
 import com.heapik.slot.commonsevent.ports.outbox.EventOutboxCursorRepositoryPort;
 import com.heapik.slot.outbox.domain.EventOutboxCursorOrm;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Component
+@Repository
 public class EventOutboxCursorRepositoryAdapter implements EventOutboxCursorRepositoryPort {
 
     private final EventOutboxCursorJpaRepository eventOutboxCursorJpaRepository;
