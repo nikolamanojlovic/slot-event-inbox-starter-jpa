@@ -18,9 +18,12 @@ jobs:
         with:
           java-version: 21
           distribution: 'temurin'
+          server-id: github
+          server-username: ${{ github.actor }}
+          server-password: ${{ secrets.SLOT_COMMONS_READ_TOKEN }}
 
       - name: Build JAR
-        run: ./mvnw clean package
+        run: ./mvnw clean package -Pgithub
 
       - name: Publish JAR to GitHub Packages
         run: ./mvnw deploy -DskipTests
