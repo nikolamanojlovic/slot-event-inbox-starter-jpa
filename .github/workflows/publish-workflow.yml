@@ -25,9 +25,11 @@ jobs:
       - name: Build JAR
         run: ./mvnw clean package
         env:
+          GITHUB_ACTOR: nikolamanojlovic
           GITHUB_TOKEN: ${{ secrets.SLOT_TOKEN }}
 
       - name: Publish JAR to GitHub Packages
         run: ./mvnw deploy -DskipTests
         env:
+          GITHUB_ACTOR: nikolamanojlovic
           GITHUB_TOKEN: ${{ secrets.SLOT_TOKEN }}
