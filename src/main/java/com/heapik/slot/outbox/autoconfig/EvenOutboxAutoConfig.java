@@ -9,6 +9,7 @@ import com.heapik.slot.outbox.persistence.EventOutboxJpaRepository;
 import com.heapik.slot.outbox.persistence.EventOutboxRepositoryAdapter;
 import com.heapik.slot.outbox.service.EventOutboxPublisherService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +18,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @EnableConfigurationProperties(EventOutboxProperties.class)
 @EnableJpaRepositories(basePackages = "com.heapik.slot.outbox.persistence")
+@EntityScan(basePackages = "com.heapik.slot.outbox.domain")
 public class EvenOutboxAutoConfig {
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
+    }
 
     @Bean
     @ConditionalOnMissingBean
