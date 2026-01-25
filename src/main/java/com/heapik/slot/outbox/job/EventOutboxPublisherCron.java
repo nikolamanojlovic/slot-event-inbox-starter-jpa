@@ -7,9 +7,7 @@ import com.heapik.slot.outbox.service.EventOutboxPublisherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
-@Component
 public class EventOutboxPublisherCron {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EventOutboxPublisherCron.class);

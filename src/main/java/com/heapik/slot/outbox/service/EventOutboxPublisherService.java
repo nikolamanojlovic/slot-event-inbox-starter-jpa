@@ -4,16 +4,15 @@ import com.heapik.slot.commonsevent.domain.outbox.EventOutbox;
 import com.heapik.slot.commonsevent.domain.outbox.EventOutboxCursor;
 import com.heapik.slot.commonsevent.ports.outbox.EventOutboxCursorRepositoryPort;
 import com.heapik.slot.commonsevent.ports.outbox.EventOutboxRepositoryPort;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-@Service
 public class EventOutboxPublisherService {
 
+    // TODO: [TechDept] Move to configuration later
     private static final String PROCESSOR_NAME = "event-outbox-publisher";
 
     // TODO: [TechDept] Move to configuration later
