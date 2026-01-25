@@ -1,0 +1,28 @@
+name: Build and Publish Slot Event Outbox Starter JPA
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 21
+          distribution: 'temurin'
+
+      - name: Build JAR
+        run: ./mvnw clean package -DskipTests=false
+
+      - name: Publish JAR to GitHub Packages
+        run: ./mvnw deploy -DskipTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.SLOT_EVENT_OUTBOX_JPA_STARTER_DEPLOY_TOKEN }}
