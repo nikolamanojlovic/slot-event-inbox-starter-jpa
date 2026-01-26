@@ -13,19 +13,18 @@ databaseChangeLog:
               CREATE TABLE ${schemaName}.event_outbox (
                 id UUID PRIMARY KEY,
                 event_type VARCHAR(255) NOT NULL,
-                payload CLOB NOT NULL,
-                occurred_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                payload JSONB NOT NULL,
+                occurred_at TIMESTAMPTZ NOT NULL DEFAULT now(),
                 published BOOLEAN NOT NULL DEFAULT FALSE,
-                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
                 retry_count INT NOT NULL DEFAULT 0,
-                error_message CLOB
+                error_message TEXT
               );
       rollback:
         - sql:
             sql: DROP TABLE IF EXISTS ${schemaName}.event_outbox;
 
-  # 002: Add index on unpublished events
   - changeSet:
       id: 002-add-unpublished-index
       author: ${spring.application.name}-system
@@ -39,7 +38,6 @@ databaseChangeLog:
         - sql:
             sql: DROP INDEX IF EXISTS idx_event_outbox_unpublished;
 
-  # 003: Create event_outbox_cursor table
   - changeSet:
       id: 003-create-event-outbox-cursor-table
       author: ${spring.application.name}-system
@@ -48,10 +46,10 @@ databaseChangeLog:
             sql: |
               CREATE TABLE ${schemaName}.event_outbox_cursor (
                 processor_name VARCHAR(100) PRIMARY KEY,
-                cursor TIMESTAMP NOT NULL,
+                cursor TIMESTAMPTZ NOT NULL,
                 tie_breaker UUID NOT NULL,
-                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+                created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
               );
       rollback:
         - sql:
