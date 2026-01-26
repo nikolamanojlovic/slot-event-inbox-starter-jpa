@@ -7,12 +7,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-  liquibase:
-    enabled: false
-    parameters:
-      schemaName: public
-
-slot:
-  event:
-    outbox:
-      schema-name: public
