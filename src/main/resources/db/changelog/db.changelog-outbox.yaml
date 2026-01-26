@@ -1,8 +1,7 @@
 databaseChangeLog:
-
   - property:
       name: schemaName
-      value: public
+      value: ${slot.event.outbox.schema-name:public}
 
   - changeSet:
       id: 001-create-event-outbox-table
