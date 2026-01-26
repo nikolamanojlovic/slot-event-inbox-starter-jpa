@@ -6,7 +6,7 @@ databaseChangeLog:
 
   - changeSet:
       id: 001-create-event-outbox-table
-      author: system
+      author: ${spring.application.name}-system
       changes:
         - sql:
             sql: |
@@ -28,7 +28,7 @@ databaseChangeLog:
   # 002: Add index on unpublished events
   - changeSet:
       id: 002-add-unpublished-index
-      author: system
+      author: ${spring.application.name}-system
       changes:
         - sql:
             sql: |
@@ -42,7 +42,7 @@ databaseChangeLog:
   # 003: Create event_outbox_cursor table
   - changeSet:
       id: 003-create-event-outbox-cursor-table
-      author: system
+      author: ${spring.application.name}-system
       changes:
         - sql:
             sql: |
