@@ -1,6 +1,8 @@
 package com.heapik.slot.outbox.autoconfig;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.heapik.slot.commonsevent.ports.outbox.EventOutboxCursorRepositoryPort;
 import com.heapik.slot.commonsevent.ports.outbox.EventOutboxRepositoryPort;
 import com.heapik.slot.outbox.persistence.EventOutboxCursorJpaRepository;
@@ -24,7 +26,10 @@ public class EvenOutboxAutoConfig {
     @Bean
     @ConditionalOnMissingBean
     public ObjectMapper objectMapper() {
-        return new ObjectMapper();
+        var om = new ObjectMapper();
+        om.registerModule(new JavaTimeModule());
+        om.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        return om;
     }
 
     @Bean
