@@ -63,7 +63,8 @@ public class EventOutboxOrm {
         this.errorMessage = null;
     }
 
-    private EventOutboxOrm(String eventType, JsonNode payload, Instant occurredAt, boolean published, int retryCount, String errorMessage) {
+    private EventOutboxOrm(UUID id, String eventType, JsonNode payload, Instant occurredAt, boolean published, int retryCount, String errorMessage) {
+        this.id = id;
         this.eventType = eventType;
         this.payload = payload;
         this.occurredAt = occurredAt;
@@ -74,6 +75,7 @@ public class EventOutboxOrm {
 
     public static EventOutboxOrm fromDomain(EventOutbox eventOutbox) {
         return new EventOutboxOrm(
+                eventOutbox.getId(),
                 eventOutbox.getEventType(),
                 eventOutbox.getPayload(),
                 eventOutbox.getOccurredAt(),

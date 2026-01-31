@@ -14,11 +14,27 @@ import java.util.UUID;
 public interface EventOutboxJpaRepository extends JpaRepository<EventOutboxOrm, UUID> {
 
     @Query("""
-            SELECT new com.heapik.slot.commonsevent.domain.outbox.EventOutbox(e.id,e.eventType, e.payload, e.occurredAt, e.published, e.retryCount, e.errorMessage)
-            FROM EventOutboxOrm e
-            WHERE e.published = false AND e.retryCount < :retryCount
-                AND (e.occurredAt > :cursor OR (e.occurredAt = :cursor AND e.id > :tieBreaker))
-            ORDER BY e.occurredAt ASC, e.id ASC
+                SELECT new com.heapik.slot.commonsevent.domain.outbox.EventOutbox(
+                    e.id, e.eventType, e.payload, e.occurredAt,
+                    e.published, e.retryCount, e.errorMessage
+                )
+                FROM EventOutboxOrm e
+                WHERE e.published = false
+                  AND e.retryCount < :retryCount
+                  AND (
+                        e.retryCount > 0
+                        OR (
+                            e.retryCount = 0
+                            AND (
+                                e.occurredAt > :cursor
+                             OR (e.occurredAt = :cursor AND e.id > :tieBreaker)
+                            )
+                        )
+                  )
+                ORDER BY
+                  e.retryCount DESC,
+                  e.occurredAt ASC,
+                  e.id ASC
             """)
     List<EventOutbox> findUnpublishedEventOutboxesByRetryCountLessThan(
             @Param("retryCount") int retryCount,
