@@ -1,6 +1,7 @@
-package com.heapik.slot.outbox.domain;
+package com.heapik.slot.inbox.domain;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.heapik.slot.commonsevent.domain.inbox.EventInbox;
 import com.heapik.slot.commonsevent.domain.outbox.EventOutbox;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,12 +13,12 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Entity
-@Table(name = "event_outbox",
+@Table(name = "event_inbox",
         indexes = {
-                @Index(name = "idx_event_outbox_unpublished", columnList = "occurred_at, id")
+                @Index(name = "idx_event_inbox_unpublished", columnList = "occurred_at, id")
         }
 )
-public class EventOutboxOrm {
+public class EventInboxOrm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -51,10 +52,10 @@ public class EventOutboxOrm {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    public EventOutboxOrm() {
+    public EventInboxOrm() {
     }
 
-    public EventOutboxOrm(String eventType, JsonNode payload, Instant occurredAt) {
+    public EventInboxOrm(String eventType, JsonNode payload, Instant occurredAt) {
         this.eventType = eventType;
         this.payload = payload;
         this.occurredAt = occurredAt;
@@ -63,7 +64,7 @@ public class EventOutboxOrm {
         this.errorMessage = null;
     }
 
-    private EventOutboxOrm(UUID id, String eventType, JsonNode payload, Instant occurredAt, boolean published, int retryCount, String errorMessage) {
+    private EventInboxOrm(UUID id, String eventType, JsonNode payload, Instant occurredAt, boolean published, int retryCount, String errorMessage) {
         this.id = id;
         this.eventType = eventType;
         this.payload = payload;
@@ -73,15 +74,15 @@ public class EventOutboxOrm {
         this.errorMessage = errorMessage;
     }
 
-    public static EventOutboxOrm fromDomain(EventOutbox eventOutbox) {
-        return new EventOutboxOrm(
-                eventOutbox.getId(),
-                eventOutbox.getEventType(),
-                eventOutbox.getPayload(),
-                eventOutbox.getOccurredAt(),
-                eventOutbox.isPublished(),
-                eventOutbox.getRetryCount(),
-                eventOutbox.getErrorMessage()
+    public static EventInboxOrm fromDomain(EventInbox eventInbox) {
+        return new EventInboxOrm(
+                eventInbox.getId(),
+                eventInbox.getEventType(),
+                eventInbox.getPayload(),
+                eventInbox.getOccurredAt(),
+                eventInbox.isPublished(),
+                eventInbox.getRetryCount(),
+                eventInbox.getErrorMessage()
         );
     }
 

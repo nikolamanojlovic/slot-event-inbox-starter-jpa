@@ -1,4 +1,4 @@
-name: Build and Publish Slot Event Outbox Starter JPA
+name: Build and Publish Slot Event Inbox Starter JPA
 
 on:
   push:

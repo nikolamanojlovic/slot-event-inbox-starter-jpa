@@ -1,2 +1,2 @@
-com.heapik.slot.outbox.autoconfig.EvenOutboxAutoConfig
-com.heapik.slot.outbox.autoconfig.EventOutboxSchedulerAutoConfig
+com.heapik.slot.inbox.autoconfig.EvenInboxAutoConfig
+com.heapik.slot.inbox.autoconfig.EventInboxSchedulerAutoConfig

@@ -1,11 +1,11 @@
-package com.heapik.slot.outbox.autoconfig;
+package com.heapik.slot.inbox.autoconfig;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
 @ConfigurationProperties(prefix = "slot.event.outbox")
 @Validated
-public class EventOutboxProperties {
+public class EventInboxProperties {
     /**
      * Enable / disable outbox publishing scheduler
      */

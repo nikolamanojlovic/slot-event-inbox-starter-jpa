@@ -3,5 +3,5 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 @SpringBootConfiguration
 @EnableAutoConfiguration
-public class SlotEventOutboxStarterJpaSmokeTestApp {
+public class SlotEventInboxStarterJpaSmokeTestApp {
 }

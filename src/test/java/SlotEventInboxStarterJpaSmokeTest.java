@@ -7,8 +7,8 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ActiveProfiles("test")
-@SpringBootTest(classes = SlotEventOutboxStarterJpaSmokeTestApp.class)
-public class SlotEventOutboxStarterJpaSmokeTest {
+@SpringBootTest(classes = SlotEventInboxStarterJpaSmokeTestApp.class)
+public class SlotEventInboxStarterJpaSmokeTest {
 
     @Autowired
     private ApplicationContext context;
