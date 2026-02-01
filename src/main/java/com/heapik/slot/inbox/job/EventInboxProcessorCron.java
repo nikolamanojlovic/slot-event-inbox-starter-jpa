@@ -39,7 +39,7 @@ public class EventInboxProcessorCron {
             LOGGER.info("Processing {} events for cursor {}, {}", batch.size(), pagination.getCursor(), pagination.getTieBreaker());
             for (var event : batch) {
                 try {
-                    eventInboxProcessorService.processEventInbox(event);
+                    eventInboxProcessorService.processInboxEvent(event);
                     // TODO: [TechDept] Rename to processed in future
                     event.published();
                     success.add(event);

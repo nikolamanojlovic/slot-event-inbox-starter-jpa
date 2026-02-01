@@ -57,5 +57,5 @@ public abstract class EventInboxProcessorService {
         eventInboxCursorRepositoryPort.save(cursor);
     }
 
-    public abstract void processEventInbox(EventInbox eventInbox);
+    public abstract void processInboxEvent(EventInbox eventInbox);
 }
