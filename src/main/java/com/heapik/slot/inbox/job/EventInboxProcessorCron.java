@@ -1,7 +1,6 @@
 package com.heapik.slot.inbox.job;
 
 import com.heapik.slot.commonsevent.domain.inbox.EventInbox;
-import com.heapik.slot.commonsevent.ports.publisher.EventPublisherPort;
 import com.heapik.slot.inbox.autoconfig.EventInboxProperties;
 import com.heapik.slot.inbox.service.EventInboxProcessorService;
 import org.slf4j.Logger;
@@ -18,7 +17,7 @@ public class EventInboxProcessorCron {
 
     private final EventInboxProcessorService eventInboxProcessorService;
 
-    public EventInboxProcessorCron(EventInboxProperties properties, EventInboxProcessorService eventInboxProcessorService, EventPublisherPort eventPublisherPort) {
+    public EventInboxProcessorCron(EventInboxProperties properties, EventInboxProcessorService eventInboxProcessorService) {
         this.properties = properties;
         this.eventInboxProcessorService = eventInboxProcessorService;
     }
@@ -65,7 +64,7 @@ public class EventInboxProcessorCron {
             }
 
             if (batch.size() < properties.getBatchSize()) {
-                LOGGER.info("Finished processing outbox events.");
+                LOGGER.info("Finished processing inbox events.");
                 return;
             }
         }

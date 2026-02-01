@@ -4,7 +4,7 @@
     <groupId>com.heapik.slot.inbox</groupId>
     <artifactId>slot-event-inbox-starter-jpa</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>slot-event-inbox-starter-jpa</name>
 
     <repositories>
